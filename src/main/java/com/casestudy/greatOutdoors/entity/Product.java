@@ -31,6 +31,9 @@ public class Product implements Serializable {
     @Column(name = "Create_Date", nullable = false)
     private Date createDate;
 
+   /* @ManyToOne(fetch = FetchType.LAZY)
+    private Order order;*/
+
     public Product() {
     }
 

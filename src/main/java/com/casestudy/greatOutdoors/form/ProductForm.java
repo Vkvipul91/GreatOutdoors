@@ -1,4 +1,4 @@
-package com.casestudy.greatOutdoors.controller;
+package com.casestudy.greatOutdoors.form;
 
 import com.casestudy.greatOutdoors.entity.Product;
 import org.springframework.stereotype.Component;

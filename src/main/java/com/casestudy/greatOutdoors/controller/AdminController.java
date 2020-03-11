@@ -3,20 +3,17 @@ package com.casestudy.greatOutdoors.controller;
 
 import com.casestudy.greatOutdoors.dao.ProductRepository;
 import com.casestudy.greatOutdoors.entity.Product;
+import com.casestudy.greatOutdoors.form.ProductForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -31,13 +28,13 @@ public class AdminController {
     public String showAvailableProducts(ModelMap model){
         List<Product> products = productrepo.findAll();
         model.put("products",products);
-        return "avail_product";
+        return "admin_product_list";
     }
 
     @RequestMapping(value = "/admin/new_product", method = RequestMethod.GET)
     public String showAddNewProductPage(ModelMap model) {
         model.addAttribute("productForm", new ProductForm("000", "Default"));
-        return "product";
+        return "admin_add_product";
     }
 
     @RequestMapping(value = "/admin/new_product", method = RequestMethod.POST)

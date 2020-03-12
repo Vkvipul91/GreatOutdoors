@@ -14,7 +14,7 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${products}" var="product">
-					<form:form method="post" action= "/buy_now"  >
+					<form:form method="post" action= "/customer/buy_now" modelAttribute="order" >
 					<tr>
 						<td>${product.code}</td>
     					<td>${product.name}</td>

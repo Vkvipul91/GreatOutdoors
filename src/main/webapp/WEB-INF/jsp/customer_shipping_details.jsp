@@ -1,7 +1,7 @@
 <%@ include file="common/header.jspf" %>
 <%@ include file="common/navigation.jspf" %>
 <div class="container">
-<form:form method="post"  action = "/place_order" modelAttribute="order">
+<form:form method="post"  action = "/customer/place_order" modelAttribute="order">
 		<table class="table table-striped">
 			<caption>Available Products:</caption>
 			<thead>
@@ -16,9 +16,9 @@
 			<tbody>
 
 					<tr>
-						<td>${product.code}</td>
-    					<td>${product.name}</td>
-    					<td>${product.price}</td>
+						<td>${order.product.code}</td>
+    					<td>${order.product.name}</td>
+    					<td>${order.product.price}</td>
     					<td>${order.quantity}</td>
     					<td>${order.bill}</td>
     					<td></td>
@@ -57,9 +57,11 @@
                         				<form:errors path="customerPhone" cssClass="text-warning"/>
                         			</fieldset>
 
-              <input type="hidden" name="name" value = ${product.code}>
+              <input type="hidden" name="code" value = ${order.product.code}>
               <input type="hidden" name="quantity" value = ${order.quantity}>
               <input type="hidden" name="bill" value = ${order.bill}>
+               <input type="hidden" name="id" value = ${order.id}>
+
 
 
         			<button type="submit" class="btn btn-success">Place Order</button>

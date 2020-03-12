@@ -24,14 +24,9 @@
     					<td>${order.customerPhone}</td>
     					<td>${order.product.name}</td>
     					<td>${order.product.price}</td>
-    					<td>${order.Customer.id}</td>
-    					<td>${order.Customer.name}</td>
-    					 <td><img class="img-thumbnail" width="100" height="80" src="/get_image?code=${product.code}" /></td>
+    					<td>${order.status}</td>
 
-						<td><a type="button" class="btn btn-success"
-							href="/update_product?id=${product.code}">Update</a></td>
-						<td><a type="button" class="btn btn-warning" href="/delete_product?id=${product.code}">Delete</a></td>
-					</tr>
+						</tr>
 				</c:forEach>
 			</tbody>
 		</table>

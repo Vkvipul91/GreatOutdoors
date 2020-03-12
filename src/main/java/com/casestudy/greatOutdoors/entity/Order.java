@@ -24,6 +24,9 @@ public class Order implements Serializable {
     @Column(name = "Total_Bill")
     private double bill;
 
+    @Column(name = "Status")
+    private String status;
+
     @Column(name = "Customer_Name")
     private String customerName;
 
@@ -48,6 +51,17 @@ public class Order implements Serializable {
     public Order(){
 
     }
+
+
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public int getQuantity() {
         return quantity;
     }

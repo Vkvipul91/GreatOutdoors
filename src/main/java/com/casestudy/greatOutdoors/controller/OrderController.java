@@ -13,6 +13,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Date;
 import java.util.List;
@@ -40,7 +41,12 @@ public class OrderController {
     public String initiateOrder(@RequestParam("pcode") String code,Order order, ModelMap model) {
         String username = "vipul";
         Product product = productService.getProduct(code);
-        Order orderInserted = orderService.newOrder(order,product,username);
+        order.setProduct(product);
+        order.setStatus("initiated");
+        order.setCustomerName(username);
+        order.setOrderDate(new Date());
+        order.setBill(order.getQuantity()*product.getPrice());
+        Order orderInserted = orderService.newOrder(order);
         model.addAttribute("order",orderInserted);
         return "customer_shipping_details";
     }
@@ -48,7 +54,11 @@ public class OrderController {
     @RequestMapping(value ="/customer/place_order", method = RequestMethod.POST)
     public String placeOrder(ModelMap model, Order order, @RequestParam("code") String code) {
         Product product = productService.getProduct(code);
-        orderService.placeOrder(order,product);
+        order.setProduct(product);
+        order.setStatus("completed");
+        order.setOrderDate(new Date());
+        Order completedOrder = orderService.placeOrder(order);
+        model.addAttribute("completedOrder", completedOrder);
         return "success";
     }
 
@@ -58,5 +68,18 @@ public class OrderController {
         List<Order> orderHistoryList= orderService.findOrderHistory(customerName);
         model.put("orderHistory",orderHistoryList);
         return "order_history";
+    }
+
+    @RequestMapping(value ="/refund_order", method = RequestMethod.GET)
+    public String refundOrder(ModelMap model, @RequestParam("id") String orderId, RedirectAttributes redirectAttributes){
+        Order order = orderService.getOrder(orderId);
+        boolean isRefunded = orderService.processRefund(order);
+        if(isRefunded) {
+            redirectAttributes.addFlashAttribute("message", "refunded successfully");
+            return "redirect:/order_status";
+        }
+
+        redirectAttributes.addFlashAttribute("message", "Order cannot be refunded !!");
+        return "redirect:/order_status";
     }
 }

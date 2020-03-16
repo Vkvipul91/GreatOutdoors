@@ -28,42 +28,44 @@ public class OrderService {
     }
 
 
-    public Order newOrder(Order order, Product product, String username) {
-        order.setProduct(product);
-        order.setCustomerName(username);
-        order.setStatus("initiated");
-        double unitprice = product.getPrice();
-        int quantity = order.getQuantity();
-        double total_amt = this.calculateAmount(unitprice,quantity);
-        order.setBill(total_amt);
+    public Order newOrder(Order order) {
         Order createdOrder = orderrepository.save(order);
         this.createOrderStatus(createdOrder);
         return createdOrder;
     }
 
-    private double calculateAmount(double unitprice, int quantity) {
-        double total_amount = unitprice*quantity;
-        return total_amount;
-    }
 
     public void createOrderStatus(Order order){
 
         OrderStatus orderStatus = new OrderStatus();
         orderStatus.setStatus(order.getStatus());
         orderStatus.setOrder(order);
-        orderStatus.setUpdatedAt(new Date());
+        orderStatus.setUpdatedAt(order.getOrderDate());
 
         orderStatusRepository.save(orderStatus);
     }
 
-    public void placeOrder(Order order, Product product) {
-        Order orderFound = orderrepository.findById(order.getId()).get();
-        orderFound.setStatus("completed");
-        orderFound.setProduct(product);
-        orderFound.setOrderDate(new Date());
-        orderrepository.save(orderFound);
-        this.createOrderStatus(orderFound);
+    public Order placeOrder(Order order) {
+        Order orderInitiated = orderrepository.save(order);
+        this.createOrderStatus(orderInitiated);
+        return orderInitiated;
+
     }
 
 
+    public Order getOrder(String orderId) {
+        Order order = orderrepository.findById(Integer.parseInt(orderId)).get();
+        return order;
+    }
+
+    public boolean processRefund(Order order) {
+        if(order.getStatus().equals("completed")) {
+            order.setStatus("Refunded");
+            order.setOrderDate(new Date());
+            orderrepository.save(order);
+            this.createOrderStatus(order);
+            return true;
+        }
+        return false;
+    }
 }

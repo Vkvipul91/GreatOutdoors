@@ -6,12 +6,20 @@
 			<thead>
 				<tr class="active">
 					<th>Order No</th>
-					<th>Name</th>
-					<th>Price</th>
-					<th>Updated At</th>
+					<th>Order Date</th>
+					<th>Quantity</th>
+					<th>Total Amount</th>
+					<th>Customer Name</th>
+					<th>Shipping Address</th>
+					<th>Shipping Email</th>
+					<th>Shipping Phone</th>
+					<th>Product Name</th>
+					<th>Product Price</th>
+					<th>Status</th>
 				</tr>
 			</thead>
             <tbody>
+                <font color = "red">${message}</font>
 				<c:forEach items="${orderHistory}" var="order">
 					<tr>
 						<td>${order.id}</td>
@@ -25,6 +33,8 @@
     					<td>${order.product.name}</td>
     					<td>${order.product.price}</td>
     					<td>${order.status}</td>
+    					<td><a type="button" class="btn btn-success" href="/refund_order?id=${order.id}">Refund</a></td>
+                        <td><a type="button" class="btn btn-warning" href="/change_order?id=${order.id}">Change Address</a></td>
 
 						</tr>
 				</c:forEach>

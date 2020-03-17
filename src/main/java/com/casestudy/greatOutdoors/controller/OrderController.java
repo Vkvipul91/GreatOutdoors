@@ -1,8 +1,6 @@
 package com.casestudy.greatOutdoors.controller;
 
 
-import com.casestudy.greatOutdoors.dao.OrderRepository;
-import com.casestudy.greatOutdoors.dao.ProductRepository;
 import com.casestudy.greatOutdoors.entity.Order;
 import com.casestudy.greatOutdoors.entity.Product;
 import com.casestudy.greatOutdoors.service.OrderService;
@@ -30,9 +28,10 @@ public class OrderController {
     ProductService productService;
 
 
+
     @RequestMapping(value ="/customer/product", method = RequestMethod.GET)
     public String showAvailableProducts(ModelMap model){
-        List<Product> products = productService.getAllPorducts();
+        List<Product> products = productService.getAllProducts();
         model.put("products",products);
         return "customer_product_list";
     }
@@ -58,6 +57,9 @@ public class OrderController {
         order.setStatus("completed");
         order.setOrderDate(new Date());
         Order completedOrder = orderService.placeOrder(order);
+        if(!completedOrder.equals(null)){
+            productService.updateInventory(product,order.getQuantity());
+        }
         model.addAttribute("completedOrder", completedOrder);
         return "success";
     }
@@ -75,7 +77,7 @@ public class OrderController {
         Order order = orderService.getOrder(orderId);
         boolean isRefunded = orderService.processRefund(order);
         if(isRefunded) {
-            redirectAttributes.addFlashAttribute("message", "refunded successfully");
+            redirectAttributes.addFlashAttribute("message", "Refund initiated successfully");
             return "redirect:/order_status";
         }
 

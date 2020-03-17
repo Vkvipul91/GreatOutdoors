@@ -11,8 +11,9 @@ import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Order,Integer> {
     List<Order> findByCustomerName(String customerName);
-    //List<Order> findAllByOrderDate(Date orderDate);
 
     @Query("SELECT c.product, count(c) FROM Order c WHERE c.status = :status GROUP BY c.product ORDER BY count(c) DESC")
     List<Object[]> findByProduct(String status);
+
+    List<Order> findByStatus(String status);
 }

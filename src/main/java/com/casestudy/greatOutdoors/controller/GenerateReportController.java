@@ -20,16 +20,26 @@ import java.util.Set;
 @Controller
 public class GenerateReportController {
 
-    @Autowired
-    ProductService productService;
 
     @Autowired
     OrderService orderService;
 
     @RequestMapping(value ="/admin/order_report", method = RequestMethod.GET)
-    public String orderReport(ModelMap model){
-        return "";
+    public String orderCompletedReport(ModelMap model){
+        String status = "completed";
+        List<Order> orderList = orderService.getOrdersByStatus(status);
+        model.addAttribute("orderCompletedList",orderList);
+        return "admin_order_report";
     }
+
+    @RequestMapping(value ="/admin/refund_report", method = RequestMethod.GET)
+    public String orderRefundReport(ModelMap model){
+        String status = "refund initiated";
+        List<Order> orderList = orderService.getOrdersByStatus(status);
+        model.addAttribute("orderRefundList",orderList);
+        return "admin_refund_report";
+    }
+
 
     @RequestMapping(value ="/admin/hot_product", method = RequestMethod.GET)
     public String getMostSellingProduct(ModelMap model){

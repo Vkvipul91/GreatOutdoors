@@ -96,4 +96,9 @@ public class OrderService {
         }
        return null;
     }
+
+    public List<Order> getOrdersByStatus(String status) {
+        List<Order> completedOrderList =orderrepository.findByStatus(status);
+        return completedOrderList;
+    }
 }

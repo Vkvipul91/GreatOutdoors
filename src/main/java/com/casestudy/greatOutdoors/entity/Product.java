@@ -1,7 +1,5 @@
 package com.casestudy.greatOutdoors.entity;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -23,6 +21,9 @@ public class Product implements Serializable {
     @Column(name = "Price")
     private double price;
 
+    @Column(name = "Quantity")
+    private Integer quantity;
+
     @Lob
     @Column(name = "Image", length = Integer.MAX_VALUE, nullable = true)
     private byte[] image;
@@ -31,8 +32,6 @@ public class Product implements Serializable {
     @Column(name = "Create_Date", nullable = false)
     private Date createDate;
 
-   /* @ManyToOne(fetch = FetchType.LAZY)
-    private Order order;*/
 
     public Product() {
     }
@@ -42,6 +41,14 @@ public class Product implements Serializable {
         this.name = name;
         this.price = price;
         this.createDate = createDate;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
     public String getCode() {

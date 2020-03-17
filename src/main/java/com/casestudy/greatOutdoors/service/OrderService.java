@@ -8,8 +8,10 @@ import com.casestudy.greatOutdoors.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
+import javax.jnlp.IntegrationService;
+import javax.persistence.criteria.CriteriaBuilder;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @Service
 public class OrderService {
@@ -46,9 +48,9 @@ public class OrderService {
     }
 
     public Order placeOrder(Order order) {
-        Order orderInitiated = orderrepository.save(order);
-        this.createOrderStatus(orderInitiated);
-        return orderInitiated;
+        Order orderPlaced = orderrepository.save(order);
+        this.createOrderStatus(orderPlaced);
+        return orderPlaced;
 
     }
 
@@ -60,12 +62,38 @@ public class OrderService {
 
     public boolean processRefund(Order order) {
         if(order.getStatus().equals("completed")) {
-            order.setStatus("Refunded");
+            order.setStatus("refund initiated");
             order.setOrderDate(new Date());
             orderrepository.save(order);
             this.createOrderStatus(order);
             return true;
         }
         return false;
+    }
+
+    public void generateLastDayReport(Date date) {
+
+        //orderrepository.findAllByOrderDate(date2);
+
+        //System.out.println(day);
+        //orderrepository.findAllByOrderDate(date);
+    }
+
+
+    public List<Order> getAllOrders() {
+        List<Order> orders = orderrepository.findAll();
+        return orders;
+    }
+
+    public Map<Product, Integer> getTopSellingProduct(String status) {
+       List<Object[]> results = orderrepository.findByProduct(status);
+       Map<Product,Integer> productMap = new HashMap<Product, Integer>();
+        for (Object[] result : results) {
+            Product product = (Product) result[0];
+            int count = ((Number) result[1]).intValue();
+            productMap.put(product,count);
+            return productMap;
+        }
+       return null;
     }
 }

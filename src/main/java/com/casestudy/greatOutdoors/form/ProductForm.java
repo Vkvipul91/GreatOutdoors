@@ -9,6 +9,7 @@ public class ProductForm {
     private String code;
     private String name;
     private double price;
+    private Integer quantity;
 
     private boolean newProduct = false;
 
@@ -67,5 +68,13 @@ public class ProductForm {
 
     public void setNewProduct(boolean newProduct) {
         this.newProduct = newProduct;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 }

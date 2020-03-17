@@ -1,5 +1,5 @@
 <%@ include file="common/header.jspf" %>
-<%@ include file="common/navigation.jspf" %>
+<%@ include file="common/admin_navigation.jspf" %>
 	<div class="container">
 		<form:form method="post"  modelAttribute="productForm" enctype="multipart/form-data">
 
@@ -23,6 +23,13 @@
             					class="form-control" required="required"/>
             				<form:errors path="price" cssClass="text-warning"/>
             </fieldset>
+
+            <fieldset class="form-group">
+                        				<form:label path="quantity">Quantity</form:label>
+                        				<form:input path="quantity" type="text"
+                        					class="form-control" required="required"/>
+                        				<form:errors path="quantity" cssClass="text-warning"/>
+                        </fieldset>
 
             <fieldset class="form-group">
                         				<form:label path="fileData">Image</form:label>

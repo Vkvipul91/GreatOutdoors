@@ -22,7 +22,7 @@ public class ProductService {
        return productDetails;
     }
 
-    public List<Product> getAllPorducts() {
+    public List<Product> getAllProducts() {
         List<Product> products = productRepository.findAll();
         return products;
     }
@@ -30,6 +30,20 @@ public class ProductService {
     public Product getProduct(String code) {
         Product product = productRepository.findById(code).get();
         return product;
+    }
+
+
+    public void updateInventory(Product product, int quantity) {
+        int inventory_quantity = product.getQuantity();
+        int ordered_quantity = quantity;
+        int updated_quantity = inventory_quantity - ordered_quantity;
+        product.setQuantity(updated_quantity);
+        productRepository.save(product);
+    }
+
+
+    public void saveProduct(Product product) {
+        productRepository.save(product);
     }
 }
 

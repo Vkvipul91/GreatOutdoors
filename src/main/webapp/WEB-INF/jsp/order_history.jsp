@@ -16,12 +16,13 @@
 					<th>Product Name</th>
 					<th>Product Price</th>
 					<th>Status</th>
+				    <th>Action</th>
 				</tr>
 			</thead>
             <tbody>
                 <font color = "red">${message}</font>
 				<c:forEach items="${orderHistory}" var="order">
-					<tr>
+					<tr class="active">
 						<td>${order.id}</td>
     					<td>${order.orderDate}</td>
     					<td>${order.quantity}</td>
@@ -34,7 +35,6 @@
     					<td>${order.product.price}</td>
     					<td>${order.status}</td>
     					<td><a type="button" class="btn btn-success" href="/refund_order?id=${order.id}">Refund</a></td>
-                        <td><a type="button" class="btn btn-warning" href="/change_order?id=${order.id}">Change Address</a></td>
 
 						</tr>
 				</c:forEach>

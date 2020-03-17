@@ -9,7 +9,8 @@
 					<th>Code</th>
 					<th>Name</th>
 					<th>Price</th>
-					<th>Updated At</th>
+					<th>Image</th>
+					<th>Select</th>
 				</tr>
 			</thead>
 			<tbody>

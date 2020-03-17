@@ -4,6 +4,7 @@ package com.casestudy.greatOutdoors.controller;
 import com.casestudy.greatOutdoors.dao.ProductRepository;
 import com.casestudy.greatOutdoors.entity.Product;
 import com.casestudy.greatOutdoors.form.ProductForm;
+import com.casestudy.greatOutdoors.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,11 +23,11 @@ import java.util.List;
 public class AdminController {
 
     @Autowired
-    ProductRepository productrepo;
+    ProductService productService;
 
     @RequestMapping(value ="/admin/product", method = RequestMethod.GET)
     public String showAvailableProducts(ModelMap model){
-        List<Product> products = productrepo.findAll();
+        List<Product> products = productService.getAllProducts();
         model.put("products",products);
         return "admin_product_list";
     }
@@ -38,16 +39,17 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/admin/new_product", method = RequestMethod.POST)
-    public String addNewProduct(ModelMap model, ProductForm productForm) throws IOException {
+    public String addNewProduct(ModelMap model, ProductForm productForm, Product product) throws IOException {
 
-        Product product = new Product();
+       // Product product = new Product();
         product.setCode(productForm.getCode());
         product.setName(productForm.getName());
         product.setPrice(productForm.getPrice());
         byte[] image = productForm.getFileData().getBytes();
         product.setImage(image);
         product.setCreateDate(new Date());
-        productrepo.save(product);
+        product.setQuantity(productForm.getQuantity());
+        productService.saveProduct(product);
         return "redirect:/admin/product";
     }
     @RequestMapping(value = { "/get_image" }, method = RequestMethod.GET)
@@ -55,7 +57,7 @@ public class AdminController {
                              @RequestParam("code") String code) throws IOException {
         Product product = null;
         if (code != null) {
-            product = productrepo.findById(code).get();
+            product = productService.getProduct(code);
         }
         if (product != null && product.getImage() != null) {
             response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
@@ -63,6 +65,14 @@ public class AdminController {
         }
         response.getOutputStream().close();
     }
+
+    @RequestMapping(value ="/admin/report", method = RequestMethod.GET)
+    public String showReportsPage(ModelMap model){
+        return "report_links";
+    }
+
+
+
 }
 
 

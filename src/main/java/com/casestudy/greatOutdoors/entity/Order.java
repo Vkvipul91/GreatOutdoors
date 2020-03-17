@@ -41,7 +41,7 @@ public class Order implements Serializable {
 
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "product_code")
+    @JoinColumn(name = "code")
     private Product product ;
 
     @OneToOne(cascade = CascadeType.ALL)

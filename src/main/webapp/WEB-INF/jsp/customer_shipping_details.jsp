@@ -45,13 +45,13 @@
                         				<form:errors path="customerAddress" cssClass="text-warning"/>
                         			</fieldset>
                 <fieldset class="form-group">
-                        				<form:label path="customerEmail">customer Email</form:label>
+                        				<form:label path="customerEmail">Customer Email</form:label>
                         				<form:input path="customerEmail" type="text"
                         					class="form-control" required="required"/>
                         				<form:errors path="customerEmail" cssClass="text-warning"/>
                         			</fieldset>
                 <fieldset class="form-group">
-                        				<form:label path="customerPhone">customer Phone</form:label>
+                        				<form:label path="customerPhone">Customer Phone</form:label>
                         				<form:input path="customerPhone" type="text"
                         					class="form-control" required="required"/>
                         				<form:errors path="customerPhone" cssClass="text-warning"/>

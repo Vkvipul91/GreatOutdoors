@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -30,6 +31,14 @@ public class GenerateReportController {
         List<Order> orderList = orderService.getOrdersByStatus(status);
         model.addAttribute("orderCompletedList",orderList);
         return "admin_order_report";
+    }
+
+    @RequestMapping(value ="/admin/view_Last_Week", method = RequestMethod.GET)
+    public String orderFilterDropDown(ModelMap model, @RequestParam Date startDate){
+        Date endDate = new Date();
+        String status = "completed";
+        List<Order> orderListByDate = orderService.getOrdersByDate(startDate,endDate,status);
+        return "";
     }
 
     @RequestMapping(value ="/admin/refund_report", method = RequestMethod.GET)

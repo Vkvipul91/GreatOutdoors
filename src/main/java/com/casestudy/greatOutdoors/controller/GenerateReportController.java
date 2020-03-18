@@ -4,7 +4,6 @@ import com.casestudy.greatOutdoors.dao.OrderRepository;
 import com.casestudy.greatOutdoors.entity.Order;
 import com.casestudy.greatOutdoors.entity.Product;
 import com.casestudy.greatOutdoors.service.OrderService;
-import com.casestudy.greatOutdoors.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,10 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 public class GenerateReportController {
@@ -33,12 +29,17 @@ public class GenerateReportController {
         return "admin_order_report";
     }
 
-    @RequestMapping(value ="/admin/view_Last_Week", method = RequestMethod.GET)
-    public String orderFilterDropDown(ModelMap model, @RequestParam Date startDate){
-        Date endDate = new Date();
+    @RequestMapping(value ="/admin/filterByDate", method = RequestMethod.GET)
+    public String orderFilterDropDown(ModelMap model, @RequestParam Integer days){
+        //Date endDate = new Date();
+        Calendar cal = Calendar.getInstance();
+        Date endDate = cal.getTime();
+        cal.add(Calendar.DAY_OF_MONTH, -days);
+        Date startDate = cal.getTime();
         String status = "completed";
         List<Order> orderListByDate = orderService.getOrdersByDate(startDate,endDate,status);
-        return "";
+        model.addAttribute("orderCompletedList",orderListByDate);
+        return "admin_order_report";
     }
 
     @RequestMapping(value ="/admin/refund_report", method = RequestMethod.GET)

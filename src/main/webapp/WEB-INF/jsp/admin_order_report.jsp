@@ -4,13 +4,13 @@
 
 <div class = "container">
 <div class="dropdown">
-   <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Tutorials
+   <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Filter
       <span class="caret"></span></button>
   <ul class="dropdown-menu">
-    <li><a href="/admin/view_Last_Week?id=${order.id}">View Last Day</a></li>
-    <li><a href="#">View Last Week</a></li>
-    <li><a href="#">View Last Month</a></li>
-    <li><a href="#">Custom Dates</a></li>
+    <li><a href="/admin/filterByDate?days=7">View Last 7 Days</a></li>
+    <li><a href="/admin/filterByDate?days=15">View Last 15 Days</a></li>
+    <li><a href="/admin/filterByDate?days=30">View Last 30 Days</a></li>
+    <li><a href="/admin/order_report">All Orders</a></li>
   </ul>
 </div>
 
@@ -26,6 +26,7 @@
 					<th>Order Amount</th>
 					<th>Customer Name</th>
 					<th>Customer Address</th>
+					<th>Gift</th>
 					<th>Order Status</th>
 					<th>Action</th>
 				</tr>
@@ -41,7 +42,9 @@
                     <td>${order.bill}</td>
                     <td>${order.customerName}</td>
                     <td>${order.customerAddress}</td>
+                    <td>${order.giftPack}</td>
                     <td>${order.status}</td>
+
                     <td><a type="button" class="btn btn-success" href="/update_product?id=${order.id}">Modify</a></td>
                     <td><a type="button" class="btn btn-warning" href="/update_product?id=${order.id}">Cancel</a></td>
              </tr>

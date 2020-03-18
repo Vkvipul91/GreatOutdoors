@@ -11,6 +11,7 @@
 					<th>Price</th>
 					<th>Quantity</th>
 					<th>Amount</th>
+					<th>Gift Pack</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -21,6 +22,7 @@
     					<td>${order.product.price}</td>
     					<td>${order.quantity}</td>
     					<td>${order.bill}</td>
+    					<td>${order.giftPack}</td>
     					<td></td>
 
 					</tr>
@@ -60,7 +62,8 @@
               <input type="hidden" name="code" value = ${order.product.code}>
               <input type="hidden" name="quantity" value = ${order.quantity}>
               <input type="hidden" name="bill" value = ${order.bill}>
-               <input type="hidden" name="id" value = ${order.id}>
+              <input type="hidden" name="id" value = ${order.id}>
+              <input type="hidden" name="giftPack" value = ${order.giftPack}>
 
 
 

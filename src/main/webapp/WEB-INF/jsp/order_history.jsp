@@ -16,6 +16,7 @@
 					<th>Product Name</th>
 					<th>Product Price</th>
 					<th>Status</th>
+					<th>Gift</th>
 				    <th>Action</th>
 				</tr>
 			</thead>
@@ -34,6 +35,7 @@
     					<td>${order.product.name}</td>
     					<td>${order.product.price}</td>
     					<td>${order.status}</td>
+    					<td>${order.giftPack}</td>
     					<td><a type="button" class="btn btn-success" href="/refund_order?id=${order.id}">Refund</a></td>
 
 						</tr>

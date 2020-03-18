@@ -1,6 +1,18 @@
 <%@ include file="common/header.jspf" %>
 <%@ include file="common/admin_navigation.jspf" %>
+
+
 <div class = "container">
+<div class="dropdown">
+   <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Tutorials
+      <span class="caret"></span></button>
+  <ul class="dropdown-menu">
+    <li><a href="/admin/view_Last_Week?id=${order.id}">View Last Day</a></li>
+    <li><a href="#">View Last Week</a></li>
+    <li><a href="#">View Last Month</a></li>
+    <li><a href="#">Custom Dates</a></li>
+  </ul>
+</div>
 
 <table class="table table-striped">
 			<caption>Completed Order Report:</caption>

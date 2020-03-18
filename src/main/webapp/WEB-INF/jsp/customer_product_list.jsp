@@ -21,20 +21,31 @@
     					<td>${product.name}</td>
     					<td>${product.price}</td>
     					 <td><img class="img-thumbnail" width="100" height="80" src="/get_image?code=${product.code}" /></td>
-    					 <td><select id="quantity" name = "quantity">
-                               <option value="">Please select</option>
-                               <option value="1">1</option>
-                               <option value="2">2</option>
-                               <option value="3">3</option>
-                               <option value="4">4</option>
-                             </select>
-                             <br>
-                             Suggest changes to Product <br>
-                             <input type = "textarea" name = "comment">
+    					 <td>
+    					 <div class="form-group">
+                           <label for="quantity">Select:</label>
+                           <select class="form-control" id="quantity" name = "quantity">
+                             <option value="1">1</option>
+                             <option value="2">2</option>
+                             <option value="3">3</option>
+                             <option value="4">4</option>
+                           </select>
+                         </div>
+    					 <div class="form-group">
+                            <label for="comment">Comment:</label>
+                            <textarea class="form-control" rows="2" id="comment" name = "comment"></textarea>
+                         </div>
 
                          </td>
                             <input type="hidden" name="pcode" value = ${product.code}>
-                         <td><button type="submit" class="btn btn-success">Buy Now</button></td>
+                         <td>
+                         <div class="checkbox">
+                               <label><input type="checkbox" name = "giftPack" value="Y">Gift Pack</label>
+                         </div>
+                          <div>
+                         <button type="submit" class="btn btn-success">Buy Now</button>
+                         </div>
+                         </td>
 
 					</tr>
 					</form:form>

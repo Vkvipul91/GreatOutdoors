@@ -39,6 +39,11 @@ public class Order implements Serializable {
     @Column(name = "Customer_Phone")
     private String customerPhone;
 
+    @Column(name = "Comment")
+    private String comment;
+
+    @Column(name = "Gift")
+    private String giftPack;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "code")
@@ -52,7 +57,21 @@ public class Order implements Serializable {
 
     }
 
+    public String getComment() {
+        return comment;
+    }
 
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public String getGiftPack() {
+        return giftPack;
+    }
+
+    public void setGiftPack(String giftPack) {
+        this.giftPack = giftPack;
+    }
 
     public String getStatus() {
         return status;

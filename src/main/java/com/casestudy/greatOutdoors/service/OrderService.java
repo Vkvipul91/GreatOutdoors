@@ -101,4 +101,10 @@ public class OrderService {
         List<Order> completedOrderList =orderrepository.findByStatus(status);
         return completedOrderList;
     }
+
+
+    public List<Order> getOrdersByDate(Date startDate, Date endDate, String status) {
+        List<Order> orderListByDate = orderrepository.findByOrderDate(startDate,endDate,status);
+        return orderListByDate;
+    }
 }
